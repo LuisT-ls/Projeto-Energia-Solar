@@ -520,6 +520,15 @@ footer {
   #contact-form {
     max-width: 100%;
   }
+
+  #projetos .portfolio-grid {
+    grid-template-columns: 1fr;
+    grid-gap: 1.5rem;
+  }
+
+  #projetos .portfolio-grid img:first-child {
+    margin-left: 2rem;
+  }
 }
 
 @media (max-width: 480px) {
