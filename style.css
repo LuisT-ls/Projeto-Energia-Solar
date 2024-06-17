@@ -318,6 +318,40 @@ section h2 {
   background-color: white;
 }
 
+#projetos h2 {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 3rem;
+}
+
+#projetos portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2.5rem;
+}
+
+#projetos .portfolio-grid img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+#projetos .portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 800px;
+  height: auto;
+  object-fit: cover;
+}
+
+#projetos .portfolio-grid img:hover {
+  transform: scale(1.05);
+}
+
 .portfolio-slider {
   display: flex;
   overflow-x: auto;
@@ -519,15 +553,6 @@ footer {
   /* Formulário de Contato */
   #contact-form {
     max-width: 100%;
-  }
-
-  #projetos .portfolio-grid {
-    grid-template-columns: 1fr;
-    grid-gap: 1.5rem;
-  }
-
-  #projetos .portfolio-grid img:first-child {
-    margin-left: 2rem;
   }
 }
 
