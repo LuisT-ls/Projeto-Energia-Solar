@@ -198,7 +198,6 @@ function mostrarResultados(consumoMensal, tarifaKwh) {
   resultadosDiv.innerHTML += `
       <p>Tamanho do sistema recomendado: ${potenciaSistema.toFixed(2)} kWp</p>
       <p>Quantidade estimada de módulos: ${modulosNecessarios}</p>
-      <p>Custo estimado do sistema: R$ ${custoSistema.toFixed(2)}</p>
       <p>Produção mensal estimada: ${producaoMensal.toFixed(2)} kWh</p>
       <p>Redução de emissões de CO2: ${(economiaAnual * 0.084).toFixed(
         2
