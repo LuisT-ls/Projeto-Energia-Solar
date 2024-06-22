@@ -124,6 +124,124 @@ form.addEventListener('submit', function (event) {
   }
 })
 
+// Dados específicos para Salvador
+const dadosSalvador = {
+  irradiacao: 5.36, // kWh/m2.dia
+  potenciaPico: 91.45, // kWh
+  quantidadeModulos: 229
+}
+
+// Função principal da calculadora
+function calcularEconomiaSolar() {
+  const consumoMensal = parseFloat(
+    document.getElementById('consumo-mensal').value
+  )
+  const tarifaKwh = parseFloat(document.getElementById('tarifa-kwh').value)
+
+  if (isNaN(consumoMensal) || isNaN(tarifaKwh)) {
+    alert('Por favor, insira valores numéricos válidos.')
+    return
+  }
+
+  // Limpa os resultados anteriores
+  limparResultados()
+
+  // Desabilita o botão e mostra a barra de progresso
+  document.getElementById('calcular-btn').disabled = true
+  document.getElementById('progress-bar').style.display = 'block'
+  document.getElementById('loading-message').textContent = 'Calculando...'
+
+  // Simula um cálculo demorado
+  let progress = 0
+  const interval = setInterval(() => {
+    progress += 10
+    document.getElementById('progress').style.width = `${progress}%`
+    if (progress >= 100) {
+      clearInterval(interval)
+      mostrarResultados(consumoMensal, tarifaKwh)
+    }
+  }, 200)
+}
+
+// Função para mostrar os resultados
+function mostrarResultados(consumoMensal, tarifaKwh) {
+  const gastoMensalAtual = consumoMensal * tarifaKwh
+
+  // Cálculo mais preciso baseado nos dados de Salvador
+  const producaoDiaria =
+    (dadosSalvador.irradiacao * dadosSalvador.potenciaPico) / 1000
+  const producaoMensal = producaoDiaria * 30 // Assumindo 30 dias por mês
+
+  const economiaMensal = Math.min(gastoMensalAtual, producaoMensal * tarifaKwh)
+  const economiaAnual = economiaMensal * 12
+
+  // Cálculo do tamanho do sistema solar necessário (mais conservador)
+  const potenciaSistema = consumoMensal / 120 // Assumindo 120 kWh/kWp/mês em Salvador
+  const custoSistema = potenciaSistema * 5000 // Assumindo R$ 5000/kWp
+
+  // Cálculo do tempo de retorno do investimento (considerando manutenção e perdas)
+  const tempoRetorno = custoSistema / (economiaAnual * 0.9) // 10% para manutenção e perdas
+
+  // Cálculo da quantidade de módulos necessários
+  const potenciaModulo = 0.4 // Assumindo módulos de 400W
+  const modulosNecessarios = Math.ceil(potenciaSistema / potenciaModulo)
+
+  // Atualiza os resultados na página
+  document.getElementById('economia-mensal').textContent =
+    economiaMensal.toFixed(2)
+  document.getElementById('economia-anual').textContent =
+    economiaAnual.toFixed(2)
+  document.getElementById('tempo-retorno').textContent = tempoRetorno.toFixed(1)
+
+  // Adiciona informações extras
+  const resultadosDiv = document.getElementById('resultados')
+  resultadosDiv.innerHTML += `
+      <p>Tamanho do sistema recomendado: ${potenciaSistema.toFixed(2)} kWp</p>
+      <p>Quantidade estimada de módulos: ${modulosNecessarios}</p>
+      <p>Custo estimado do sistema: R$ ${custoSistema.toFixed(2)}</p>
+      <p>Produção mensal estimada: ${producaoMensal.toFixed(2)} kWh</p>
+      <p>Redução de emissões de CO2: ${(economiaAnual * 0.084).toFixed(
+        2
+      )} kg/ano</p>
+  `
+
+  // Mostra os resultados e reabilita o botão
+  document.getElementById('progress-bar').style.display = 'none'
+  document.getElementById('resultados').style.display = 'block'
+  document.getElementById('calcular-btn').disabled = false
+
+  // Adiciona animação de fade-in aos resultados
+  resultadosDiv.classList.add('show')
+}
+
+// Função para limpar os resultados
+function limparResultados() {
+  const resultadosDiv = document.getElementById('resultados')
+  resultadosDiv.innerHTML = `
+      <h3>Economia Estimada:</h3>
+      <p>Economia mensal: R$ <span id="economia-mensal">0</span></p>
+      <p>Economia anual: R$ <span id="economia-anual">0</span></p>
+      <p>Tempo de retorno do investimento: <span id="tempo-retorno">0</span> anos</p>
+  `
+  resultadosDiv.style.display = 'none'
+  resultadosDiv.classList.remove('show')
+  document.getElementById('progress-bar').style.display = 'none'
+  document.getElementById('calcular-btn').disabled = false
+}
+
+// Adiciona o evento de clique ao botão de calcular
+document
+  .getElementById('calcular-btn')
+  .addEventListener('click', calcularEconomiaSolar)
+
+// Adiciona eventos para limpar os resultados quando os inputs são alterados
+document
+  .getElementById('consumo-mensal')
+  .addEventListener('input', limparResultados)
+document
+  .getElementById('tarifa-kwh')
+  .addEventListener('input', limparResultados)
+
 // Função para enviar o email usando EmailJS
 function sendEmail(event) {
   event.preventDefault()

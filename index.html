@@ -82,11 +82,15 @@
               >
             </li>
             <li>
+              <a href="#calculadora" aria-label="Calcule sua economia"
+                ><span class="material-symbols-outlined">calculate</span>
+                Calculadora</a
+              >
+            <li>
               <a href="#projetos" aria-label="Projetos de sucesso"
                 ><span class="material-symbols-outlined">work</span> Projetos</a
               >
             </li>
-
             <li>
               <a href="#portfolio" aria-label="Nossos projetos"
                 ><span class="material-symbols-outlined">photo_library</span>
@@ -290,6 +294,35 @@
                 Tenha acesso à energia elétrica mesmo em locais remotos, sem
                 depender da rede elétrica tradicional.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="calculadora">
+        <div class="container">
+          <h2>Calcule sua Economia com Energia Solar</h2>
+          <div class="calculadora-form">
+            <label for="consumo-mensal">Consumo médio mensal (kWh):</label>
+            <input type="number" id="consumo-mensal" value="300" />
+
+            <label for="tarifa-kwh">Tarifa média do kWh (R$):</label>
+            <input type="number" id="tarifa-kwh" value="0.80" />
+
+            <button type="button" id="calcular-btn">Calcular</button>
+
+            <div id="resultados" style="display: none">
+              <h3>Economia Estimada:</h3>
+              <p>Economia mensal: R$ <span id="economia-mensal">0</span></p>
+              <p>Economia anual: R$ <span id="economia-anual">0</span></p>
+              <p>
+                Tempo de retorno do investimento:
+                <span id="tempo-retorno">0</span> anos
+              </p>
+            </div>
+            <div id="progress-bar" style="display: none">
+              <div id="progress"></div>
+              <span id="loading-message">Calculando...</span>
             </div>
           </div>
         </div>

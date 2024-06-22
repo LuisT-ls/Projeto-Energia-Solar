@@ -70,7 +70,7 @@ nav ul {
 }
 
 nav ul li {
-  margin-left: 2rem;
+  margin-left: 0.8rem;
 }
 
 /* Remove a margem do primeiro item */
@@ -81,7 +81,7 @@ nav ul li:first-child {
 nav ul li a {
   color: white;
   text-decoration: none;
-  padding: 0.8rem 1.2rem;
+  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -320,6 +320,106 @@ section h2 {
 
 .vantagem p {
   line-height: 1.8;
+}
+
+/* Estilos da Seção "Calculadora" */
+#calculadora {
+  background-color: var(--background-color);
+  padding: 5rem 0;
+}
+
+.calculadora-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.calculadora-form label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.calculadora-form input {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+#calcular-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#resultados {
+  margin-top: 2rem;
+}
+
+#progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#progress {
+  width: 0%;
+  height: 100%;
+  background-color: var(--primary-color);
+  transition: width 0.5s ease;
+  background-image: linear-gradient(to right, #4caf50, #2e7d32);
+}
+
+.calculadora-form input,
+.calculadora-form button {
+  transition: box-shadow 0.3s ease;
+}
+
+.calculadora-form input:focus,
+.calculadora-form button:focus {
+  box-shadow: 0 0 5px var(--accent-color);
+}
+
+#calcular-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#loading-message {
+  font-size: 14px;
+  color: var(--primary-color);
+  margin-left: 10px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#resultados {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#resultados.show {
+  opacity: 1;
 }
 
 /* Estilos da Seção "Projetos" */
