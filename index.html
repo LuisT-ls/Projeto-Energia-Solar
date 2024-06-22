@@ -26,6 +26,15 @@
     <script>
       AOS.init()
     </script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      ;(function () {
+        emailjs.init('1PLc3xymOa3PrKHEX')
+      })()
+    </script>
     <script src="script.js" defer></script>
   </head>
 
@@ -94,14 +103,10 @@
         <div class="container">
           <h2>Quem Somos</h2>
           <article class="sobre-content">
-            <div
-              class="sobre-text"
-              data-aos="fade-right"
-              data-aos-duration="1000"
-            >
+            <div class="sobre-text">
               <p>
-                A Rocha é pioneira em soluções de energia solar em Salvador,
-                Bahia. Com mais de 10 anos de experiência, somos referência em
+                A Instalações Salvador é pioneira em soluções de energia solar em Salvador,
+                Bahia. Com mais de 3 anos de experiência, somos referência em
                 projetos personalizados, instalação e manutenção de sistemas
                 fotovoltaicos para residências e empresas. Nossa equipe de
                 especialistas altamente qualificados está comprometida em
@@ -121,8 +126,6 @@
                 src="Image/Imagem-Rocha.webp"
                 alt="Equipe de instalação de painéis solares"
                 loading="lazy"
-                data-aos="fade-up"
-                data-aos-duration="1000"
               />
             </aside>
           </article>
@@ -280,22 +283,22 @@
           <div class="portfolio-slider" id="projetos-slider">
             <figure class="slide active">
               <img
-                src="Image/Imagem 1.webp"
+                src="Image/Imagem-1.webp"
                 alt="Sistema de energia solar instalado em residência no bairro da Graça, Salvador"
                 loading="lazy"
               />
               <figcaption>
                 <h3>Projeto Residencial em Salvador</h3>
                 <p>
-                  Transformamos a casa do Sr. João em um lar autossuficiente em
-                  energia, reduzindo sua conta de luz em 90%.
+                  Transformamos a casa em um lar autossuficiente em energia,
+                  reduzindo sua conta de luz em 90%.
                 </p>
               </figcaption>
             </figure>
             <figure class="slide active">
               <picture>
                 <img
-                  src="Image/Imagem 3.webp"
+                  src="Image/Imagem-3.webp"
                   alt="Projeto Comercial em Lauro de Freitas"
                   loading="lazy"
                 />
@@ -362,6 +365,8 @@
                 name="nome"
                 placeholder="Nome Completo"
                 required
+                oninvalid="this.setCustomValidity('Por favor, preencha seu nome completo.')"
+                oninput="this.setCustomValidity('')"
               />
             </div>
             <div>
@@ -372,6 +377,8 @@
                 name="email"
                 placeholder="Seu Email"
                 required
+                oninvalid="this.setCustomValidity('Por favor, insira um endereço de e-mail válido.')"
+                oninput="this.setCustomValidity('')"
               />
             </div>
             <div>
@@ -381,6 +388,8 @@
                 name="mensagem"
                 placeholder="Sua Mensagem"
                 required
+                oninvalid="this.setCustomValidity('Por favor, escreva sua mensagem.')"
+                oninput="this.setCustomValidity('')"
               ></textarea>
             </div>
             <button type="submit" class="btn">Enviar Mensagem</button>
@@ -392,10 +401,18 @@
     <footer>
       <div class="container">
         <p>
-          &copy; 2024 Instalações Salvador - Soluções Completas em Energia Solar
-          e Elétrica
+          &copy; 2024 ROCHA - Soluções Completas em Energia Solar e Elétrica
         </p>
       </div>
     </footer>
+    <div id="confirmationModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <h2>
+          <i class="success-icon fas fa-check-circle"></i> Mensagem Enviada!
+        </h2>
+        <p>Agradecemos o seu contato. Em breve retornaremos sua mensagem.</p>
+      </div>
+    </div>
   </body>
 </html>

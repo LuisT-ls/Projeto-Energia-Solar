@@ -123,3 +123,42 @@ form.addEventListener('submit', function (event) {
     form.classList.add('was-validated')
   }
 })
+
+// Função para enviar o email usando EmailJS
+function sendEmail(event) {
+  event.preventDefault()
+
+  emailjs
+    .sendForm(
+      'service_xmwepap',
+      'template_tqkspky',
+      '#contact-form',
+      '1PLc3xymOa3PrKHEX'
+    )
+    .then(
+      response => {
+        console.log('SUCCESS!', response.status, response.text)
+        showModal()
+        form.reset()
+      },
+      error => {
+        console.log('FAILED...', error)
+        alert(
+          'Erro ao enviar a mensagem. Por favor, tente novamente mais tarde.'
+        )
+      }
+    )
+}
+
+// Adiciona o ouvinte de eventos ao formulário
+document.getElementById('contact-form').addEventListener('submit', sendEmail)
+
+// Função para mostrar o modal
+function showModal() {
+  document.getElementById('confirmationModal').style.display = 'block'
+}
+
+// Função para fechar o modal
+function closeModal() {
+  document.getElementById('confirmationModal').style.display = 'none'
+}
