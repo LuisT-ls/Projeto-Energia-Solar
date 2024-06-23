@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Qual a vida útil de um sistema de energia solar?",
+    "answer": "Os painéis solares têm uma vida útil estimada de 25 a 30 anos, mantendo alta eficiência. Os demais componentes do sistema, como inversores e estrutura, podem durar mais de 10 anos."
+  },
+  {
+    "question": "A energia solar funciona em dias nublados ou chuvosos?",
+    "answer": "Sim, mesmo em dias nublados ou chuvosos, os painéis solares ainda captam a luz solar e geram energia, embora com menor intensidade."
+  },
+  {
+    "question": "Qual o tempo de retorno do investimento em energia solar?",
+    "answer": "O tempo de retorno varia de acordo com o tamanho do sistema, o consumo de energia e as tarifas locais. Em média, o investimento se paga em 4 a 7 anos."
+  },
+  {
+    "question": "Preciso de baterias para armazenar a energia solar?",
+    "answer": "Nem sempre. Se você estiver conectado à rede elétrica, o excedente de energia gerada durante o dia pode ser injetado na rede e utilizado à noite. Baterias são recomendadas para sistemas isolados ou para maior autonomia."
+  },
+  {
+    "question": "Quais os incentivos fiscais para energia solar?",
+    "answer": "Existem diversos incentivos fiscais para quem investe em energia solar, como isenção de ICMS e redução do IPTU em algumas cidades. Consulte a legislação local para mais detalhes."
+  },
+  {
+    "question": "A energia solar é segura?",
+    "answer": "Sim, a energia solar é uma fonte de energia segura e não emite poluentes. Os sistemas são projetados com dispositivos de segurança para evitar acidentes."
+  },
+  {
+    "question": "Qual a diferença entre energia solar fotovoltaica e térmica?",
+    "answer": "A energia solar fotovoltaica gera eletricidade a partir da luz solar, enquanto a energia solar térmica utiliza o calor do sol para aquecer água ou ambientes."
+  },
+  {
+    "question": "Posso instalar energia solar em um apartamento?",
+    "answer": "Sim, é possível instalar energia solar em apartamentos, desde que haja espaço disponível para os painéis solares e autorização do condomínio. Uma alternativa é a energia solar compartilhada."
+  },
+  {
+    "question": "Quanto custa um sistema de energia solar?",
+    "answer": "O custo de um sistema de energia solar varia de acordo com o tamanho, a qualidade dos equipamentos e a complexidade da instalação. Em média, o preço por kWp instalado é de R$ 5.000 a R$ 7.000."
+  },
+  {
+    "question": "A energia solar valoriza o imóvel?",
+    "answer": "Sim, a instalação de um sistema de energia solar pode valorizar o imóvel em até 10%. Além disso, a economia na conta de luz é um atrativo para compradores."
+  }
+]

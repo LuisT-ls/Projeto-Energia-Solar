@@ -297,3 +297,47 @@ const observer = new IntersectionObserver(
 titles.forEach(title => {
   observer.observe(title) // Começa a observar cada título
 })
+
+// Carregar dados do FAQ do JSON
+fetch('faq.json')
+  .then(response => response.json())
+  .then(faqData => {
+    const faqContainer = document.getElementById('faq-container')
+
+    faqData.forEach(item => {
+      const faqItem = document.createElement('div')
+      faqItem.classList.add('faq-item')
+      faqItem.innerHTML = `
+        <h3 class="faq-question">${item.question}</h3>
+        <div class="faq-answer">
+          <p>${item.answer}</p>
+        </div>
+      `
+      faqContainer.appendChild(faqItem)
+
+      // Oculta a resposta inicialmente
+      faqItem.querySelector('.faq-answer').style.display = 'none'
+    })
+
+    // Interatividade das perguntas e respostas
+    const faqQuestions = document.querySelectorAll('.faq-question')
+
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        // Fecha todas as outras respostas abertas
+        faqQuestions.forEach(otherQuestion => {
+          if (otherQuestion !== question) {
+            otherQuestion.parentElement.classList.remove('active')
+            otherQuestion.nextElementSibling.style.display = 'none' // Oculta a resposta
+          }
+        })
+
+        // Abre/fecha a resposta clicada
+        question.parentElement.classList.toggle('active')
+        const answer = question.nextElementSibling
+        answer.style.display =
+          answer.style.display === 'block' ? 'none' : 'block'
+      })
+    })
+  })
+  .catch(error => console.error('Erro ao carregar o FAQ:', error))
