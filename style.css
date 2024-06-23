@@ -883,7 +883,7 @@ footer {
   /* Header */
   header .container {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .logo {
@@ -891,19 +891,22 @@ footer {
   }
 
   nav ul {
-    flex-direction: column;
+    display: none;
     width: 100%;
-    margin: 0;
+    text-align: center;
+  }
+
+  nav ul.active {
+    display: block;
   }
 
   nav ul li {
-    width: 100%;
-    margin: 0;
+    margin: 0.5rem 0;
   }
 
   nav ul li a {
+    display: block;
     padding: 1rem;
-    justify-content: flex-start;
   }
 
   /* Menu responsivo */

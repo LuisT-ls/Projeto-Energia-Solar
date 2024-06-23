@@ -1,38 +1,63 @@
-// Funcionalidade do Menu Hambúrguer
 const menuToggle = document.querySelector('.menu-toggle')
 const menu = document.querySelector('.menu')
 const menuLinks = document.querySelectorAll('.menu a')
 const logo = document.querySelector('.logo')
 
-menuToggle.addEventListener('click', () => {
-  menu.classList.toggle('active')
-})
-
-// Fecha o menu em diferentes situações
+// Função para fechar o menu
 function closeMenu() {
   menu.classList.remove('active')
 }
 
-// Fecha o menu ao clicar em um link (com rolagem suave)
+// Função para rolar suavemente para uma seção
+function scrollToSection(targetId) {
+  const targetElement = document.querySelector(targetId)
+  if (targetElement) {
+    const headerOffset = document.querySelector('header').offsetHeight
+    const elementPosition = targetElement.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
+
+// Abre/fecha o menu ao clicar no botão
+menuToggle.addEventListener('click', () => {
+  menu.classList.toggle('active')
+})
+
+// Trata os cliques nos links do menu
 menuLinks.forEach(link => {
   link.addEventListener('click', event => {
     event.preventDefault()
+    const targetId = link.getAttribute('href')
+
+    // Fecha o menu imediatamente
     closeMenu()
 
-    const targetId = link.getAttribute('href')
-    const targetElement = document.querySelector(targetId)
-
-    if (targetElement) {
-      const headerOffset = document.querySelector('header').offsetHeight
-      const elementPosition = targetElement.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      })
-    }
+    // Espera um pouco antes de rolar, para dar tempo do menu fechar
+    setTimeout(() => {
+      scrollToSection(targetId)
+    }, 300)
   })
+})
+
+// Trata o clique na logo
+logo.addEventListener('click', event => {
+  event.preventDefault()
+
+  // Se o menu estiver aberto, apenas fecha o menu
+  if (menu.classList.contains('active')) {
+    closeMenu()
+  } else {
+    // Se o menu já estiver fechado, rola para o topo
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
 })
 
 // Fecha o menu ao clicar fora dele
@@ -42,56 +67,11 @@ document.addEventListener('click', event => {
   }
 })
 
-// Fecha o menu ao rolar para uma seção
-window.addEventListener('scroll', () => {
-  const sections = document.querySelectorAll('section')
-  const scrollPosition = window.scrollY + 100
-
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop
-    const sectionHeight = section.offsetHeight
-
-    if (
-      scrollPosition >= sectionTop &&
-      scrollPosition < sectionTop + sectionHeight
-    ) {
-      closeMenu()
-    }
-  })
-})
-
-// Voltar ao Início ao Clicar na Logo
-logo.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  })
-})
-
-// Rolagem Suave para as Âncoras (com ajuste para o header fixo)
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault()
-
-    const targetId = this.getAttribute('href')
-    const targetElement = document.querySelector(targetId)
-
-    if (targetElement) {
-      const headerOffset = document.querySelector('header').offsetHeight
-      const elementPosition = targetElement.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      })
-
-      // Fecha o menu após a rolagem (se estiver aberto)
-      if (menu.classList.contains('active')) {
-        menu.classList.remove('active')
-      }
-    }
-  })
+// Fecha o menu ao redimensionar a janela para telas maiores
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    closeMenu()
+  }
 })
 
 // Rolagem para a seção de contato ao clicar no botão
