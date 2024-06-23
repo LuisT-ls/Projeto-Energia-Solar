@@ -279,3 +279,21 @@ function showModal() {
 function closeModal() {
   document.getElementById('confirmationModal').style.display = 'none'
 }
+
+const titles = document.querySelectorAll('h2') // Seleciona todos os títulos h2
+
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show') // Adiciona a classe 'show' para acionar a animação
+        observer.unobserve(entry.target) // Para de observar o elemento após a animação
+      }
+    })
+  },
+  { threshold: 0.5 }
+) // Aciona a animação quando 50% do elemento estiver visível
+
+titles.forEach(title => {
+  observer.observe(title) // Começa a observar cada título
+})

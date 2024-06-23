@@ -31,6 +31,15 @@ body {
   padding: 0 20px;
 }
 
+/* Animação de escala para botões */
+.btn {
+  transition: transform 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
 /* Estilos do Cabeçalho */
 header {
   background-color: var(--primary-color);
@@ -120,6 +129,10 @@ nav ul li a .material-symbols-outlined {
   justify-content: center;
   text-align: center;
   color: white;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #hero::before {
@@ -153,6 +166,20 @@ nav ul li a .material-symbols-outlined {
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
+  z-index: 1;
+}
+
+/* Estilos de Paralaxe */
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-content {
+  padding: 5rem 0;
+  position: relative;
   z-index: 1;
 }
 
@@ -258,6 +285,11 @@ section h2 {
   font-size: 2.5rem;
   margin-bottom: 1.2rem;
   color: var(--secondary-color);
+  transition: transform 0.5s ease;
+}
+
+.servico:hover .servico-icon {
+  transform: rotate(360deg);
 }
 
 #servicos .servicos-grid .servico:first-child span.material-symbols-outlined {
