@@ -322,6 +322,7 @@ fetch('faq.json')
   })
   .catch(error => console.error('Erro ao carregar o FAQ:', error))
 
+// Chatbot
 const chatbotToggle = document.getElementById('chatbot-toggle')
 const chatbotContainer = document.getElementById('chatbot-container')
 
@@ -404,7 +405,7 @@ function findAnswer(question) {
   // Verifica se há uma correspondência exata
   for (const item of faqData) {
     if (question.toLowerCase() === item.question.toLowerCase()) {
-      return item.answer
+      return item.answer // Retorna a resposta correta
     }
   }
 
@@ -418,10 +419,9 @@ function findAnswer(question) {
     const answerSimilarity = similarity(question, item.answer)
     const maxSimilarity = Math.max(questionSimilarity, answerSimilarity)
 
-    if (bestMatch && bestSimilarity >= threshold) {
-      return bestMatch.answer
-    } else {
-      return generateFallbackResponse(question)
+    if (maxSimilarity > bestSimilarity) {
+      bestMatch = item
+      bestSimilarity = maxSimilarity
     }
   }
 
@@ -448,8 +448,18 @@ function handleUserInput() {
   const userMessage = chatbotInput.value.trim()
   if (userMessage) {
     addMessage(userMessage, true)
+
+    // Cria a animação de loading
+    const loadingElement = createLoadingAnimation()
+
     const botResponse = findAnswer(userMessage)
-    setTimeout(() => addMessage(botResponse), 500)
+    setTimeout(() => {
+      // Remove a animação de loading
+      chatbotMessages.removeChild(loadingElement)
+
+      addMessage(botResponse)
+    }, 1000) // Simula um tempo de resposta de 1 segundo
+
     chatbotInput.value = ''
   }
 }
@@ -460,11 +470,6 @@ chatbotInput.addEventListener('keypress', e => {
     handleUserInput()
   }
 })
-
-// Mensagem de boas-vindas
-addMessage(
-  'Olá! Sou o assistente virtual da Instalações Salvador. Como posso ajudar você hoje?'
-)
 
 // Sugestões de perguntas frequentes
 const suggestedQuestions = [
@@ -477,16 +482,42 @@ const suggestedQuestions = [
 function addSuggestedQuestions() {
   const suggestionsContainer = document.createElement('div')
   suggestionsContainer.classList.add('chatbot-suggestions')
+
   suggestedQuestions.forEach(question => {
-    const suggestionButton = document.createElement('button')
-    suggestionButton.textContent = question
-    suggestionButton.addEventListener('click', () => {
+    // Cria um elemento de mensagem para cada sugestão
+    const suggestionMessage = document.createElement('div')
+    suggestionMessage.classList.add('chatbot-message', 'chatbot-bot')
+    suggestionMessage.textContent = question
+
+    // Adiciona um evento de clique para preencher o input com a pergunta
+    suggestionMessage.addEventListener('click', () => {
       chatbotInput.value = question
       handleUserInput()
     })
-    suggestionsContainer.appendChild(suggestionButton)
+
+    suggestionsContainer.appendChild(suggestionMessage)
   })
-  chatbotMessages.appendChild(suggestionsContainer)
+
+  // Adiciona as sugestões como a primeira mensagem do chat
+  chatbotMessages.prepend(suggestionsContainer)
 }
 
 addSuggestedQuestions()
+
+// Mensagem de boas-vindas
+addMessage(
+  'Olá! Sou o assistente virtual da Instalações Salvador. Como posso ajudar você hoje?'
+)
+
+function createLoadingAnimation() {
+  const loadingElement = document.createElement('div')
+  loadingElement.classList.add('loading') // Classe para estilizar a animação
+  loadingElement.innerHTML = `
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  `
+  chatbotMessages.appendChild(loadingElement)
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight // Rola para baixo
+  return loadingElement // Retorna o elemento para removê-lo depois
+}

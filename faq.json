@@ -1,5 +1,29 @@
 [
   {
+  "question": "Como funciona a energia solar?",
+  "answer": "A energia solar é gerada a partir da luz do sol, captada por painéis solares fotovoltaicos que convertem a luz em eletricidade. Os painéis são conectados a um inversor que transforma a corrente contínua em corrente alternada, pronta para uso."
+  },
+  {
+    "question": "Quais são as vantagens da energia solar?",
+    "answer": "As principais vantagens da energia solar são a economia na conta de luz, a valorização do imóvel, a sustentabilidade e a independência energética. Além disso, a energia solar é uma fonte limpa e renovável."
+  },
+  {
+    "question": "Como é feita a instalação de energia solar?",
+    "answer": "A instalação de energia solar é feita por uma equipe especializada, que avalia o local, projeta o sistema, instala os painéis solares e os demais componentes, e realiza a conexão com a rede elétrica. O processo é rápido e não gera sujeira."
+  },
+  {
+    "question": "Vocês fazem manutenção de sistemas solares?",
+    "answer": "Sim, oferecemos serviços de manutenção preventiva e corretiva para sistemas de energia solar. Nossos técnicos são treinados e certificados para garantir o bom funcionamento do seu sistema."
+  },
+  {
+    "question": "Quanto tempo dura a instalação de energia solar?",
+    "answer": "A instalação de um sistema de energia solar pode ser feita em poucos dias, dependendo do tamanho e da complexidade do projeto. Em média, a instalação leva de 2 a 5 dias."
+  },
+  {
+    "question": "Como é feita a manutenção de um sistema de energia solar?",
+    "answer": "A manutenção de um sistema de energia solar é simples e requer poucos cuidados. Recomenda-se limpar os painéis solares regularmente, verificar a fixação da estrutura e inspecionar os cabos e conexões."
+  },
+  {
     "question": "Qual a vida útil de um sistema de energia solar?",
     "answer": "Os painéis solares têm uma vida útil estimada de 25 a 30 anos, mantendo alta eficiência. Os demais componentes do sistema, como inversores e estrutura, podem durar mais de 10 anos."
   },
