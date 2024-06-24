@@ -1,0 +1,23 @@
+{
+  "energia solar": ["painel solar", "placa solar", "fotovoltaico", "energia fotovoltaica", "sistema solar"],
+  "instalação": ["instalar", "colocar", "montar", "implementar"],
+  "manutenção": ["manter", "consertar", "reparar", "revisar"],
+  "benefícios": ["vantagens", "proveitos", "ganhos"],
+  "custo": ["preço", "valor", "quanto custa"],
+  "economia": ["poupar", "reduzir gastos", "diminuir despesas"],
+  "sustentabilidade": ["meio ambiente", "ecologia", "preservação"],
+  "funcionamento": ["como funciona", "operação", "mecanismo"],
+  "durabilidade": ["vida útil", "tempo de duração", "garantia"],
+  "financiamento": ["parcelamento", "crédito", "financiar"],
+  "orçamento": ["estimativa", "calcular", "cotacao"],
+  "contato": ["falar", "entrar em contato", "ligar", "email", "telefone", "whatsapp"],
+  "empresa": ["companhia", "negócio", "organização", "instituição"],
+  "residencial": ["casa", "moradia", "lar", "apartamento"],
+  "comercial": ["empresa", "negócio", "loja", "escritório"],
+  "industrial": ["fábrica", "indústria", "produção", "manufatura"],
+  "rural": ["campo", "fazenda", "sítio", "chácara"],
+  "urbano": ["cidade", "metrópole", "município", "centro"],
+  "energia elétrica": ["eletricidade", "luz", "energia"],
+  "energia limpa": ["energia verde", "energia sustentável", "energia renovável"],
+  "energia renovável": ["energia limpa", "energia verde", "energia sustentável"]
+}

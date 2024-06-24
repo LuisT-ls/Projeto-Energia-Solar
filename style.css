@@ -738,6 +738,8 @@ section h2 {
   flex-grow: 1;
   overflow-y: auto;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 #chatbot-input {
@@ -759,6 +761,8 @@ section h2 {
   padding: 5px 10px;
   border-radius: 10px;
   max-width: 80%;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .chatbot-user {
@@ -795,9 +799,29 @@ section h2 {
   background-color: var(--primary-color);
 }
 
+.welcome-message-container {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 10px;
+}
+
+.initial-message {
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Estilos para as sugestões */
+.chatbot-suggestions .chatbot-message {
+  font-size: 0.8em;
+  background-color: #f0f0f0;
+  border-left: 4px solid var(--primary-color);
+  padding-left: 15px;
+}
+
 .loading {
   display: flex;
-  align-items: center; /* Centraliza verticalmente */
+  align-items: center;
 }
 
 .loading-dots {
@@ -823,7 +847,7 @@ section h2 {
   margin: 0 5px;
   background-color: var(--primary-color); /* Cor dos pontos */
   border-radius: 50%;
-  animation: loading-animation 1s infinite ease-in-out; /* Animação */
+  animation: loading-animation 1s infinite ease-in-out;
 }
 
 .dot:nth-child(2) {
@@ -846,6 +870,12 @@ section h2 {
   100% {
     transform: scale(0.8);
     opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }
 

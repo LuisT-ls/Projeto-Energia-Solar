@@ -352,13 +352,28 @@ const chatbotMessages = document.getElementById('chatbot-messages')
 const chatbotInput = document.getElementById('chatbot-input')
 const chatbotSend = document.getElementById('chatbot-send')
 
-function addMessage(message, isUser = false) {
+function addMessage(
+  message,
+  isUser = false,
+  isInitial = false,
+  container = chatbotMessages
+) {
   const messageElement = document.createElement('div')
   messageElement.classList.add('chatbot-message')
   messageElement.classList.add(isUser ? 'chatbot-user' : 'chatbot-bot')
+
+  // Adiciona a classe 'initial-message' se for a mensagem inicial
+  if (isInitial) {
+    messageElement.classList.add('initial-message')
+  }
+
   messageElement.textContent = message
-  chatbotMessages.appendChild(messageElement)
-  chatbotMessages.scrollTop = chatbotMessages.scrollHeight
+  container.appendChild(messageElement) // Adiciona ao container especificado
+
+  // Rola para o final apenas se a mensagem não for adicionada ao container de boas-vindas
+  if (container === chatbotMessages) {
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight
+  }
 }
 
 function similarity(s1, s2) {
@@ -402,6 +417,7 @@ function editDistance(s1, s2) {
 }
 
 function findAnswer(question) {
+  const normalizedQuestion = normalizeQuestion(question)
   // Verifica se há uma correspondência exata
   for (const item of faqData) {
     if (question.toLowerCase() === item.question.toLowerCase()) {
@@ -447,20 +463,23 @@ function generateFallbackResponse(question) {
 function handleUserInput() {
   const userMessage = chatbotInput.value.trim()
   if (userMessage) {
-    addMessage(userMessage, true)
+    addMessage(userMessage, true) // Adiciona a pergunta do usuário
+    chatbotInput.value = '' // Limpa o campo de entrada
 
     // Cria a animação de loading
     const loadingElement = createLoadingAnimation()
 
+    // Remove as sugestões após a primeira interação do usuário
+    const suggestionsContainer = document.querySelector('.chatbot-suggestions')
+    if (suggestionsContainer) {
+      chatbotMessages.removeChild(suggestionsContainer)
+    }
+
     const botResponse = findAnswer(userMessage)
     setTimeout(() => {
-      // Remove a animação de loading
-      chatbotMessages.removeChild(loadingElement)
-
-      addMessage(botResponse)
+      chatbotMessages.removeChild(loadingElement) // Remove a animação
+      addMessage(botResponse) // Adiciona a resposta do chatbot
     }, 1000) // Simula um tempo de resposta de 1 segundo
-
-    chatbotInput.value = ''
   }
 }
 
@@ -484,25 +503,35 @@ function addSuggestedQuestions() {
   suggestionsContainer.classList.add('chatbot-suggestions')
 
   suggestedQuestions.forEach(question => {
-    // Cria um elemento de mensagem para cada sugestão
     const suggestionMessage = document.createElement('div')
     suggestionMessage.classList.add('chatbot-message', 'chatbot-bot')
     suggestionMessage.textContent = question
 
-    // Adiciona um evento de clique para preencher o input com a pergunta
     suggestionMessage.addEventListener('click', () => {
-      chatbotInput.value = question
-      handleUserInput()
+      // Adiciona a pergunta selecionada ao chat como mensagem do usuário
+      addMessage(question, true)
+
+      // Cria a animação de loading
+      const loadingElement = createLoadingAnimation()
+
+      const botResponse = findAnswer(question) // Busca a resposta
+      setTimeout(() => {
+        chatbotMessages.removeChild(loadingElement) // Remove a animação
+        addMessage(botResponse) // Adiciona a resposta do bot
+      }, 1000)
     })
 
     suggestionsContainer.appendChild(suggestionMessage)
   })
 
-  // Adiciona as sugestões como a primeira mensagem do chat
-  chatbotMessages.prepend(suggestionsContainer)
+  chatbotMessages.appendChild(suggestionsContainer)
 }
 
 addSuggestedQuestions()
+
+const welcomeMessageContainer = document.createElement('div')
+welcomeMessageContainer.classList.add('welcome-message-container')
+chatbotMessages.appendChild(welcomeMessageContainer)
 
 // Mensagem de boas-vindas
 addMessage(
@@ -520,4 +549,24 @@ function createLoadingAnimation() {
   chatbotMessages.appendChild(loadingElement)
   chatbotMessages.scrollTop = chatbotMessages.scrollHeight // Rola para baixo
   return loadingElement // Retorna o elemento para removê-lo depois
+}
+
+let synonymsData // Variável para armazenar os sinônimos
+
+Promise.all([
+  fetch('faq.json').then(response => response.json()),
+  fetch('synonyms.json').then(response => response.json())
+])
+  .then(([faq, synonyms]) => {
+    faqData = faq
+    synonymsData = synonyms
+  })
+  .catch(error => console.error('Erro ao carregar dados:', error))
+
+function normalizeQuestion(question) {
+  const words = question.toLowerCase().split(/\s+/) // Divide em palavras
+  const normalizedWords = words.map(word => {
+    return synonymsData[word] ? synonymsData[word][0] : word // Substitui por sinônimo principal, se houver
+  })
+  return normalizedWords.join(' ') // Junta as palavras novamente
 }
