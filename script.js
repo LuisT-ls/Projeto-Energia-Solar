@@ -325,6 +325,7 @@ fetch('faq.json')
 // Chatbot
 const chatbotToggle = document.getElementById('chatbot-toggle')
 const chatbotContainer = document.getElementById('chatbot-container')
+const faqSection = document.getElementById('faq')
 
 chatbotToggle.addEventListener('click', () => {
   chatbotContainer.classList.toggle('active')
@@ -570,3 +571,44 @@ function normalizeQuestion(question) {
   })
   return normalizedWords.join(' ') // Junta as palavras novamente
 }
+
+// Intersection Observer para a seção FAQ
+const faqObserver = new IntersectionObserver(
+  entries => {
+    // Verifica se a seção FAQ está visível e se o topo da seção está acima da metade da janela do navegador
+    if (
+      entries[0].isIntersecting &&
+      entries[0].boundingClientRect.top < window.innerHeight / 2 &&
+      !chatbotContainer.classList.contains('active')
+    ) {
+      chatbotToggle.style.display = 'none'
+      chatbotToggle.style.visibility = 'hidden'
+    } else {
+      chatbotToggle.style.display = 'flex'
+    }
+  },
+  { threshold: 0.1 }
+)
+
+// Função para verificar a posição da seção FAQ e ocultar/mostrar o botão
+function checkFaqVisibility() {
+  const faqRect = faqSection.getBoundingClientRect()
+  if (
+    faqRect.top < window.innerHeight / 2 &&
+    !chatbotContainer.classList.contains('active')
+  ) {
+    chatbotToggle.style.display = 'none' // Oculta o botão
+  } else {
+    chatbotToggle.style.display = 'flex' // Mostra o botão
+    chatbotToggle.style.visibility = 'visible' // Garante que o botão seja visível se mostrado
+  }
+}
+
+// Adiciona os eventos de rolagem e DOMContentLoaded à janela
+window.addEventListener('scroll', checkFaqVisibility)
+document.addEventListener('DOMContentLoaded', checkFaqVisibility)
+
+// Chama a função checkFaqVisibility() no carregamento inicial da página
+checkFaqVisibility()
+
+faqObserver.observe(faqSection)
