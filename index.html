@@ -50,6 +50,7 @@
       gtag('config', 'G-G5X2JY0D9W')
     </script>
     <script src="script.js" defer></script>
+    <script src="faq.json"></script>
   </head>
 
   <body>
@@ -506,6 +507,20 @@
           <div class="faq-accordion" id="faq-container"></div>
         </div>
       </section>
+
+      <button id="chatbot-toggle" aria-label="Abrir chat">
+        <span class="material-symbols-outlined">chat</span>
+      </button>
+      
+      <div id="chatbot-container">
+        <div id="chatbot-messages"></div>
+        <input
+        type="text"
+        id="chatbot-input"
+        placeholder="Digite sua pergunta..."
+        />
+        <button id="chatbot-send">Enviar</button>
+      </div>
     </main>
 
     <footer>

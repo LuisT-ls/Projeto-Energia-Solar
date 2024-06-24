@@ -321,3 +321,172 @@ fetch('faq.json')
     })
   })
   .catch(error => console.error('Erro ao carregar o FAQ:', error))
+
+const chatbotToggle = document.getElementById('chatbot-toggle')
+const chatbotContainer = document.getElementById('chatbot-container')
+
+chatbotToggle.addEventListener('click', () => {
+  chatbotContainer.classList.toggle('active')
+
+  // Alterna o aria-label do botão para indicar o estado atual
+  if (chatbotContainer.classList.contains('active')) {
+    chatbotToggle.setAttribute('aria-label', 'Fechar chat')
+  } else {
+    chatbotToggle.setAttribute('aria-label', 'Abrir chat')
+  }
+})
+
+chatbotContainer.classList.remove('active')
+
+let faqData
+
+fetch('faq.json')
+  .then(response => response.json())
+  .then(data => {
+    faqData = data
+  })
+  .catch(error => console.error('Erro ao carregar o FAQ:', error))
+
+const chatbotMessages = document.getElementById('chatbot-messages')
+const chatbotInput = document.getElementById('chatbot-input')
+const chatbotSend = document.getElementById('chatbot-send')
+
+function addMessage(message, isUser = false) {
+  const messageElement = document.createElement('div')
+  messageElement.classList.add('chatbot-message')
+  messageElement.classList.add(isUser ? 'chatbot-user' : 'chatbot-bot')
+  messageElement.textContent = message
+  chatbotMessages.appendChild(messageElement)
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight
+}
+
+function similarity(s1, s2) {
+  let longer = s1
+  let shorter = s2
+  if (s1.length < s2.length) {
+    longer = s2
+    shorter = s1
+  }
+  const longerLength = longer.length
+  if (longerLength === 0) {
+    return 1.0
+  }
+  return (
+    (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength)
+  )
+}
+
+function editDistance(s1, s2) {
+  s1 = s1.toLowerCase()
+  s2 = s2.toLowerCase()
+
+  const costs = new Array()
+  for (let i = 0; i <= s1.length; i++) {
+    let lastValue = i
+    for (let j = 0; j <= s2.length; j++) {
+      if (i == 0) costs[j] = j
+      else {
+        if (j > 0) {
+          let newValue = costs[j - 1]
+          if (s1.charAt(i - 1) != s2.charAt(j - 1))
+            newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1
+          costs[j - 1] = lastValue
+          lastValue = newValue
+        }
+      }
+    }
+    if (i > 0) costs[s2.length] = lastValue
+  }
+  return costs[s2.length]
+}
+
+function findAnswer(question) {
+  // Verifica se há uma correspondência exata
+  for (const item of faqData) {
+    if (question.toLowerCase() === item.question.toLowerCase()) {
+      return item.answer
+    }
+  }
+
+  // Se não houver correspondência exata, calcula a similaridade
+  const threshold = 0.7 // Limiar de similaridade ajustável
+  let bestMatch = null
+  let bestSimilarity = 0
+
+  for (const item of faqData) {
+    const questionSimilarity = similarity(question, item.question)
+    const answerSimilarity = similarity(question, item.answer)
+    const maxSimilarity = Math.max(questionSimilarity, answerSimilarity)
+
+    if (bestMatch && bestSimilarity >= threshold) {
+      return bestMatch.answer
+    } else {
+      return generateFallbackResponse(question)
+    }
+  }
+
+  if (bestMatch && bestSimilarity >= threshold) {
+    return bestMatch.answer
+  } else {
+    return generateFallbackResponse(question)
+  }
+}
+
+function generateFallbackResponse(question) {
+  const fallbackResponses = [
+    'Desculpe, não tenho uma resposta específica para essa pergunta. Posso ajudar com algo mais?',
+    'Essa é uma pergunta interessante, mas não tenho informações suficientes para respondê-la. Que tal tentar reformular?',
+    'Não tenho certeza sobre isso. Que tal perguntar sobre nossos serviços de energia solar ou instalações elétricas?',
+    'Hmm, essa é uma boa pergunta. Para obter uma resposta mais precisa, sugiro entrar em contato diretamente com nossa equipe.',
+    'Não tenho uma resposta exata para isso. Gostaria de saber mais sobre nossos projetos de energia solar?'
+  ]
+
+  return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
+}
+
+function handleUserInput() {
+  const userMessage = chatbotInput.value.trim()
+  if (userMessage) {
+    addMessage(userMessage, true)
+    const botResponse = findAnswer(userMessage)
+    setTimeout(() => addMessage(botResponse), 500)
+    chatbotInput.value = ''
+  }
+}
+
+chatbotSend.addEventListener('click', handleUserInput)
+chatbotInput.addEventListener('keypress', e => {
+  if (e.key === 'Enter') {
+    handleUserInput()
+  }
+})
+
+// Mensagem de boas-vindas
+addMessage(
+  'Olá! Sou o assistente virtual da Instalações Salvador. Como posso ajudar você hoje?'
+)
+
+// Sugestões de perguntas frequentes
+const suggestedQuestions = [
+  'Como funciona a energia solar?',
+  'Quais são os benefícios da energia solar?',
+  'Quanto custa instalar painéis solares?',
+  'Vocês fazem manutenção de sistemas solares?'
+]
+
+function addSuggestedQuestions() {
+  const suggestionsContainer = document.createElement('div')
+  suggestionsContainer.classList.add('chatbot-suggestions')
+  suggestedQuestions.forEach(question => {
+    const suggestionButton = document.createElement('button')
+    suggestionButton.textContent = question
+    suggestionButton.addEventListener('click', () => {
+      chatbotInput.value = question
+      handleUserInput()
+    })
+    suggestionsContainer.appendChild(suggestionButton)
+  })
+  chatbotMessages.appendChild(suggestionsContainer)
+}
+
+addSuggestedQuestions()
