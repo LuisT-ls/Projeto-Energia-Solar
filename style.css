@@ -710,12 +710,13 @@ section h2 {
 }
 
 #chatbot-container {
-  display: none;
+  visibility: hidden;
 }
 
 #chatbot-container.active {
   display: flex;
   opacity: 1;
+  visibility: visible;
 }
 
 #chatbot-container {
