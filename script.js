@@ -1,5 +1,6 @@
 const menuToggle = document.querySelector('.menu-toggle')
 const menu = document.querySelector('.menu')
+const dropdowns = document.querySelectorAll('.dropdown')
 const menuLinks = document.querySelectorAll('.menu a')
 const logo = document.querySelector('.logo')
 
@@ -26,6 +27,24 @@ function scrollToSection(targetId) {
 // Abre/fecha o menu ao clicar no botão
 menuToggle.addEventListener('click', () => {
   menu.classList.toggle('active')
+})
+
+// Adiciona evento de clique para fechar o menu dropdown ao clicar fora dele
+document.addEventListener('click', event => {
+  if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+    menu.classList.remove('active')
+  }
+})
+
+// Adiciona evento de mouseover e mouseout para abrir e fechar o submenu dropdown
+dropdowns.forEach(dropdown => {
+  dropdown.addEventListener('mouseover', () => {
+    dropdown.querySelector('.submenu').style.display = 'block'
+  })
+
+  dropdown.addEventListener('mouseout', () => {
+    dropdown.querySelector('.submenu').style.display = 'none'
+  })
 })
 
 // Trata os cliques nos links do menu
