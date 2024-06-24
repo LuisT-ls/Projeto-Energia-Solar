@@ -1,5 +1,9 @@
 [
   {
+  "question": "O que é energia solar?",
+  "answer": "A energia solar é a energia proveniente da luz do sol, captada por painéis solares fotovoltaicos que convertem a luz em eletricidade. É uma fonte limpa, renovável e sustentável."
+  },
+  {
   "question": "Como funciona a energia solar?",
   "answer": "A energia solar é gerada a partir da luz do sol, captada por painéis solares fotovoltaicos que convertem a luz em eletricidade. Os painéis são conectados a um inversor que transforma a corrente contínua em corrente alternada, pronta para uso."
   },
