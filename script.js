@@ -442,6 +442,10 @@ function findAnswer(question) {
     }
   }
 
+  if (question.toLowerCase().includes('quanto custa instalar')) {
+    return 'Hmm, essa é uma boa pergunta. Para obter uma resposta mais precisa, sugiro entrar em contato diretamente com nossa equipe.'
+  }
+
   if (bestMatch && bestSimilarity >= threshold) {
     return bestMatch.answer
   } else {
@@ -600,7 +604,7 @@ function checkFaqVisibility() {
     chatbotToggle.style.display = 'none' // Oculta o botão
   } else {
     chatbotToggle.style.display = 'flex' // Mostra o botão
-    chatbotToggle.style.visibility = 'visible' // Garante que o botão seja visível se mostrado
+    chatbotToggle.style.visibility = 'visible'
   }
 }
 
