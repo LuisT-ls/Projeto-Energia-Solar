@@ -298,7 +298,7 @@ titles.forEach(title => {
 })
 
 // Carregar dados do FAQ do JSON
-fetch('faq.json')
+fetch('data/faq.json')
   .then(response => response.json())
   .then(faqData => {
     const faqContainer = document.getElementById('faq-container')
@@ -361,7 +361,7 @@ chatbotContainer.classList.remove('active')
 
 let faqData
 
-fetch('faq.json')
+fetch('data/faq.json')
   .then(response => response.json())
   .then(data => {
     faqData = data
@@ -578,8 +578,8 @@ function createLoadingAnimation() {
 let synonymsData // Variável para armazenar os sinônimos
 
 Promise.all([
-  fetch('faq.json').then(response => response.json()),
-  fetch('synonyms.json').then(response => response.json())
+  fetch('data/faq.json').then(response => response.json()),
+  fetch('data/synonyms.json').then(response => response.json())
 ])
   .then(([faq, synonyms]) => {
     faqData = faq
