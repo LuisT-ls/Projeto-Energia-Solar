@@ -15,9 +15,9 @@ Este projeto é um site institucional para a empresa Instalações Salvador, esp
 ## Estrutura do Projeto:
 
 * ```index.html```: Arquivo principal do site, contendo a estrutura HTML.
-* ```style.css```: Arquivo de estilos CSS, responsável pela aparência visual do site.
-* ```script.js```: Arquivo JavaScript, contendo as funcionalidades interativas do site.
-* ```faq.json```: Arquivo JSON com as perguntas frequentes para o chatbot.
+* css/: Pasta contendo o arquivo ```style.css```, responsável pela aparência visual do site.
+* js/: Pasta contendo o arquivo ```script.js```, contendo as funcionalidades interativas do site.
+* data/: Pasta contendo os arquivos ```faq.json``` e ```synonyms.json```, responsáveis pela interação com o chatbot e validação de palavras a partir de sinônimos.
 * Image/: Pasta contendo as imagens utilizadas no site.
 * Informações Legais/: Pasta contendo os documentos legais (política de privacidade e termos de uso).
 
@@ -36,6 +36,10 @@ Este projeto é um site institucional para a empresa Instalações Salvador, esp
 * **Conteúdo:** Todo o conteúdo textual do site pode ser editado diretamente no arquivo index.html.
 * **Imagens:** As imagens podem ser substituídas por outras na pasta Image/.
 * **Perguntas Frequentes:** As perguntas e respostas do chatbot podem ser editadas no arquivo faq.json.
+
+## Licença:
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo ```LICENSE``` para mais detalhes.
 
 ## Considerações Finais:
 
