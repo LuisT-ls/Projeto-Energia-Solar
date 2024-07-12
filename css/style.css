@@ -1,11 +1,11 @@
 /* Variáveis de Cores */
 :root {
-  --primary-color: #4caf50; /* Verde vibrante */
-  --secondary-color: #2196f3; /* Azul energético */
-  --accent-color: #ffc107; /* Amarelo solar */
-  --text-color: #333; /* Cinza escuro para texto */
-  --light-text-color: #666; /* Cinza claro para texto secundário */
-  --background-color: #f4f4f4; /* Cinza claro para fundo */
+  --primary-color: #4caf50;
+  --secondary-color: #2196f3;
+  --accent-color: #ffc107;
+  --text-color: #333;
+  --light-text-color: #666;
+  --background-color: #f4f4f4;
   --container-width: 1200px;
 }
 
@@ -16,6 +16,7 @@
   padding: 0;
 }
 
+/* Tipografia e Corpo */
 body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
@@ -23,15 +24,24 @@ body {
   background-color: var(--background-color);
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
 /* Container Principal */
 .main-container {
-  /* Novo nome para o container principal */
   max-width: var(--container-width);
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Animação de escala para botões */
+/* Botões */
 .btn {
   transition: transform 0.3s ease;
 }
@@ -40,7 +50,7 @@ body {
   transform: scale(1.1);
 }
 
-/* Estilos do Cabeçalho */
+/* Cabeçalho */
 header {
   background-color: var(--primary-color);
   color: white;
@@ -67,8 +77,6 @@ header .container {
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  text-decoration: none;
-  color: white;
   margin-left: 1.5rem;
 }
 
@@ -82,14 +90,12 @@ nav ul li {
   margin-left: 0.8rem;
 }
 
-/* Remove a margem do primeiro item */
 nav ul li:first-child {
   margin-left: 0;
 }
 
 nav ul li a {
   color: white;
-  text-decoration: none;
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
@@ -106,7 +112,6 @@ nav ul li a .material-symbols-outlined {
   margin-right: 0.5rem;
 }
 
-/* Estilos para o botão de menu (responsivo) */
 .menu-toggle {
   display: none;
   background: none;
@@ -116,74 +121,45 @@ nav ul li a .material-symbols-outlined {
   color: white;
 }
 
-/* Estilos do Hero */
+/* Hero */
 #hero {
   position: relative;
   height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('/Image/Imagem-Principal.webp');
-  background-size: cover;
-  background-position: center;
+    url('/Image/Imagem-Principal.webp') center/cover no-repeat fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: white;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
-#hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+#hero h1,
+#hero p,
+#hero .btn {
+  z-index: 1;
 }
 
 #hero h1 {
   font-size: 4rem;
   margin-bottom: 1.5rem;
-  z-index: 1;
   color: var(--background-color);
 }
 
 #hero p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  z-index: 1;
 }
 
 #hero .btn {
-  display: inline-block;
   background-color: var(--accent-color);
   color: white;
   padding: 1rem 2rem;
-  text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
-  z-index: 1;
 }
 
-/* Estilos de Paralaxe */
-.parallax {
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.parallax-content {
-  padding: 5rem 0;
-  position: relative;
-  z-index: 1;
-}
-
-/* Estilos das Seções */
+/* Seções */
 section {
   padding: 4rem 0;
 }
@@ -195,20 +171,18 @@ section h2 {
   color: var(--primary-color);
 }
 
-/* Estilos da Seção "Sobre" */
+/* Sobre */
 #sobre {
   background-color: var(--background-color);
   padding: 5rem 0;
-  background-attachment: fixed; /* Fixa o background na tela */
-  background-position: center; /* Centraliza o background */
-  background-size: cover; /* Cobre toda a área da seção */
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }
 
 #sobre h2 {
   font-size: 2.8rem;
   margin-bottom: 3rem;
-  color: var(--primary-color);
-  text-align: center;
 }
 
 .sobre-content {
@@ -224,10 +198,6 @@ section h2 {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.sobre-text p {
-  line-height: 1.8;
 }
 
 .sobre-image {
@@ -248,16 +218,10 @@ section h2 {
   filter: brightness(1.1);
 }
 
-/* Estilos da Seção "Serviços" */
+/* Serviços */
 #servicos {
   background-color: var(--background-color);
   padding: 5rem 0;
-}
-
-#servicos h2 {
-  text-align: center;
-  font-size: 2.8rem;
-  margin-bottom: 3rem;
 }
 
 .servicos-grid {
@@ -273,7 +237,6 @@ section h2 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
-  align-items: center;
 }
 
 .servico:hover {
@@ -292,10 +255,6 @@ section h2 {
   transform: rotate(360deg);
 }
 
-#servicos .servicos-grid .servico:first-child span.material-symbols-outlined {
-  color: var(--secondary-color);
-}
-
 .servico h3 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
@@ -306,16 +265,10 @@ section h2 {
   line-height: 1.8;
 }
 
-/* Estilos da Seção "Vantagens" */
+/* Vantagens */
 #vantagens {
   background-color: white;
   padding: 5rem 0;
-}
-
-#vantagens h2 {
-  text-align: center;
-  font-size: 2.8rem;
-  margin-bottom: 3rem;
 }
 
 .vantagens-grid {
@@ -354,7 +307,7 @@ section h2 {
   line-height: 1.8;
 }
 
-/* Estilos da Seção "Comparativo" */
+/* Comparativo */
 #comparativo {
   background-color: var(--background-color);
   padding: 5rem 0;
@@ -418,10 +371,6 @@ section h2 {
   line-height: 1.6;
 }
 
-.comparativo-card strong {
-  font-weight: 600;
-}
-
 .comparativo-card .btn {
   display: block;
   margin: 1rem auto 0;
@@ -446,7 +395,7 @@ section h2 {
   color: var(--primary-color);
 }
 
-/* Estilos da Seção "Calculadora" */
+/* Calculadora */
 #calculadora {
   background-color: var(--background-color);
   padding: 5rem 0;
@@ -469,6 +418,11 @@ section h2 {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.calculadora-form input:focus {
+  box-shadow: 0 0 5px var(--accent-color);
 }
 
 #calcular-btn {
@@ -481,8 +435,19 @@ section h2 {
   font-weight: bold;
 }
 
+#calcular-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 #resultados {
   margin-top: 2rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#resultados.show {
+  opacity: 1;
 }
 
 #progress-bar {
@@ -503,21 +468,6 @@ section h2 {
   background-image: linear-gradient(to right, #4caf50, #2e7d32);
 }
 
-.calculadora-form input,
-.calculadora-form button {
-  transition: box-shadow 0.3s ease;
-}
-
-.calculadora-form input:focus,
-.calculadora-form button:focus {
-  box-shadow: 0 0 5px var(--accent-color);
-}
-
-#calcular-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
 #loading-message {
   font-size: 14px;
   color: var(--primary-color);
@@ -526,27 +476,16 @@ section h2 {
 }
 
 @keyframes blink {
-  0% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
     opacity: 0.5;
   }
-  100% {
-    opacity: 1;
-  }
 }
 
-#resultados {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-#resultados.show {
-  opacity: 1;
-}
-
-/* Estilos da Seção "Projetos" */
+/* Projetos */
 #projetos {
   background-color: white;
   align-items: center;
@@ -555,12 +494,6 @@ section h2 {
 #projetos .container {
   display: flex;
   flex-direction: column;
-}
-
-#projetos h2 {
-  text-align: center;
-  font-size: 2.8rem;
-  margin-bottom: 3rem;
 }
 
 .portfolio-grid {
@@ -587,7 +520,6 @@ section h2 {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   max-width: 800px;
-  margin: 0 auto;
   margin: 3rem auto 0;
 }
 
@@ -600,24 +532,12 @@ section h2 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin: 0 1rem;
   aspect-ratio: 16/9;
-}
-
-.portfolio-slider img:first-child {
-  margin-left: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .portfolio-slider img:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.slide {
-  scroll-snap-align: start;
-  flex: 0 0 calc(100% - 4rem);
-}
-
-.slide:hover figcaption {
-  opacity: 1;
 }
 
 .slide img {
@@ -638,7 +558,7 @@ section h2 {
   line-height: 1.6;
 }
 
-/* Estilos da Seção "Portfolio" */
+/* Portfolio */
 #portfolio .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -656,17 +576,11 @@ section h2 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos da Seção "Contato" */
+/* Contato */
 #contato {
   background-color: white;
   padding: 5rem 0;
   text-align: center;
-}
-
-#contato h2 {
-  font-size: 2.8rem;
-  margin-bottom: 3rem;
-  color: var(--primary-color);
 }
 
 #contact-form {
@@ -718,9 +632,9 @@ section h2 {
   background-color: #388e3c;
 }
 
-/* Estilos do Modal */
+/* Modal */
 .modal {
-  display: none; /* Escondido por padrão */
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -781,7 +695,7 @@ section h2 {
   }
 }
 
-/* Estilos do Chatbot */
+/* Chatbot */
 #chatbot-toggle {
   position: fixed;
   bottom: 20px;
@@ -893,26 +807,6 @@ section h2 {
   background-color: var(--primary-color);
 }
 
-.welcome-message-container {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  padding: 10px;
-}
-
-.initial-message {
-  font-weight: bold;
-  text-align: center;
-}
-
-/* Estilos para as sugestões */
-.chatbot-suggestions .chatbot-message {
-  font-size: 0.8em;
-  background-color: #f0f0f0;
-  border-left: 4px solid var(--primary-color);
-  padding-left: 15px;
-}
-
 .loading {
   display: flex;
   align-items: center;
@@ -939,21 +833,14 @@ section h2 {
   width: 10px;
   height: 10px;
   margin: 0 5px;
-  background-color: var(--primary-color); /* Cor dos pontos */
+  background-color: var(--primary-color);
   border-radius: 50%;
   animation: loading-animation 1s infinite ease-in-out;
 }
 
-.dot:nth-child(2) {
-  animation-delay: 0.2s; /* Atraso para cada ponto */
-}
-
-.dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
 @keyframes loading-animation {
-  0% {
+  0%,
+  100% {
     transform: scale(0.8);
     opacity: 0.5;
   }
@@ -961,30 +848,12 @@ section h2 {
     transform: scale(1);
     opacity: 1;
   }
-  100% {
-    transform: scale(0.8);
-    opacity: 0.5;
-  }
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Estilos para a seção FAQ */
+/* FAQ */
 #faq {
   background-color: var(--background-color);
   padding: 5rem 0;
-}
-
-#faq h2 {
-  /* Título da seção */
-  text-align: center;
-  font-size: 2.8rem;
-  margin-bottom: 3rem;
-  color: var(--primary-color);
 }
 
 .faq-accordion {
@@ -1048,7 +917,7 @@ section h2 {
   transform: rotate(90deg);
 }
 
-/* Estilos do Rodapé */
+/* Rodapé */
 footer {
   background-color: var(--primary-color);
   color: white;
@@ -1076,12 +945,9 @@ footer {
 .footer-section p {
   font-size: 1rem;
   line-height: 1.6;
-  color: white;
 }
 
 .footer-section a {
-  color: white;
-  text-decoration: none;
   transition: color 0.3s ease;
 }
 
@@ -1094,24 +960,6 @@ footer {
   margin-right: 0.5rem;
 }
 
-/* Divisórias entre as seções */
-.footer-section:not(:last-child) {
-  border-right: 1px solid var(--light-text-color);
-}
-
-/* Seleciona a segunda seção (Redes Sociais) */
-.footer-section:nth-child(2) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.footer-section a i:hover {
-  transform: scale(1.2);
-  color: var(--accent-color);
-}
-
-/* Ccontainer para os ícones */
 .social-icons {
   display: flex;
   justify-content: center;
@@ -1126,8 +974,6 @@ footer {
   height: 36px;
   margin: 0 0.5rem;
   border-radius: 50%;
-  background-color: white;
-  color: var(--primary-color);
   background: linear-gradient(
     45deg,
     #405de6,
@@ -1164,7 +1010,6 @@ footer {
 
 /* Estilos Responsivos */
 @media (max-width: 768px) {
-  /* Header */
   header .container {
     flex-direction: column;
     align-items: center;
@@ -1198,23 +1043,7 @@ footer {
     padding: 1rem;
   }
 
-  /* Menu responsivo */
   .menu-toggle {
-    display: block;
-  }
-
-  .menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: var(--primary-color);
-    padding: 1rem;
-  }
-
-  .menu-toggle:focus + .menu,
-  .menu:hover {
     display: block;
   }
 
@@ -1222,7 +1051,6 @@ footer {
     display: block;
   }
 
-  /* Hero */
   #hero h1 {
     font-size: 3rem;
   }
@@ -1231,7 +1059,6 @@ footer {
     font-size: 1rem;
   }
 
-  /* Seções (Sobre, Serviços, Vantagens, Projetos, Portfolio, Contato) */
   section {
     padding: 3rem 0;
   }
@@ -1260,17 +1087,12 @@ footer {
     max-width: 80%;
   }
 
-  /* Sobre */
   .sobre-content {
     flex-direction: column;
   }
 
   .sobre-text {
     text-align: center;
-  }
-
-  .sobre-text p {
-    margin-bottom: 1.5rem;
   }
 
   .sobre-image {
@@ -1289,10 +1111,6 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .portfolio-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .portfolio-slider img {
     width: 75%;
   }
@@ -1302,14 +1120,8 @@ footer {
     align-items: flex-start;
   }
 
-  /* Formulário de Contato */
   #contact-form {
     max-width: 100%;
-  }
-
-  /* FAQ */
-  #faq .container {
-    flex-direction: column;
   }
 
   .faq-accordion {
@@ -1333,11 +1145,6 @@ footer {
     padding: 1rem;
   }
 
-  /* Rodapé */
-  .footer {
-    padding: 1rem 0;
-  }
-
   .footer-content {
     grid-template-columns: 1fr;
   }
@@ -1355,10 +1162,7 @@ footer {
     margin-bottom: 0.5rem;
   }
 
-  .footer-section p {
-    font-size: 0.9rem;
-  }
-
+  .footer-section p,
   .footer-section a {
     font-size: 0.9rem;
   }
@@ -1376,10 +1180,6 @@ footer {
 @media (max-width: 480px) {
   .servicos-grid,
   .vantagens-grid,
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-  }
-
   .portfolio-grid {
     grid-template-columns: 1fr;
   }
