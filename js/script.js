@@ -240,47 +240,49 @@ document
   .getElementById('tarifa-kwh')
   .addEventListener('input', limparResultados)
 
-// Função para enviar o email usando EmailJS
-function sendEmail(event) {
-  event.preventDefault()
+document.addEventListener('DOMContentLoaded', function () {
+  // Função para enviar o email usando EmailJS
+  async function sendEmail(event) {
+    event.preventDefault()
 
-  // Referência ao formulário
-  const form = document.getElementById('contact-form')
+    const form = document.getElementById('contact-form')
+    try {
+      const response = await emailjs.sendForm(
+        'service_xmwepap',
+        'template_tqkspky',
+        form,
+        '1PLc3xymOa3PrKHEX'
+      )
+      console.log('SUCCESS!', response.status, response.text)
+      showModal()
+      form.reset()
+    } catch (error) {
+      console.log('FAILED...', error)
+      alert('Erro ao enviar a mensagem. Por favor, tente novamente mais tarde.')
+    }
+  }
 
-  // Enviar o formulário usando EmailJS
-  emailjs
-    .sendForm('service_xmwepap', 'template_tqkspky', form, '1PLc3xymOa3PrKHEX')
-    .then(
-      response => {
-        console.log('SUCCESS!', response.status, response.text)
-        showModal()
-        form.reset()
-      },
-      error => {
-        console.log('FAILED...', error)
-        alert(
-          'Erro ao enviar a mensagem. Por favor, tente novamente mais tarde.'
-        )
-      }
-    )
-}
+  // Adicionar evento de envio ao formulário
+  document.getElementById('contact-form').addEventListener('submit', sendEmail)
 
-// Adicionar evento de envio ao formulário
-document.getElementById('contact-form').addEventListener('submit', sendEmail)
+  // Função para mostrar o modal de confirmação
+  function showModal() {
+    const modal = document.getElementById('confirmationModal')
+    modal.style.display = 'block'
+    setTimeout(() => {
+      modal.style.display = 'none'
+    }, 3000) // Fechar automaticamente após 3 segundos
+  }
 
-// Função para mostrar o modal de confirmação
-function showModal() {
-  const modal = document.getElementById('confirmationModal')
-  modal.style.display = 'block'
-  setTimeout(() => {
-    modal.style.display = 'none'
-  }, 3000) // Fechar automaticamente após 3 segundos
-}
+  // Função para fechar o modal
+  function closeModal() {
+    document.getElementById('confirmationModal').style.display = 'none'
+  }
 
-// Função para fechar o modal
-function closeModal() {
-  document.getElementById('confirmationModal').style.display = 'none'
-}
+  document
+    .getElementById('closeModalButton')
+    .addEventListener('click', closeModal)
+})
 
 const titles = document.querySelectorAll('h2') // Seleciona todos os títulos h2
 
