@@ -244,13 +244,12 @@ document
 function sendEmail(event) {
   event.preventDefault()
 
+  // Referência ao formulário
+  const form = document.getElementById('contact-form')
+
+  // Enviar o formulário usando EmailJS
   emailjs
-    .sendForm(
-      'service_xmwepap',
-      'template_tqkspky',
-      '#contact-form',
-      '1PLc3xymOa3PrKHEX'
-    )
+    .sendForm('service_xmwepap', 'template_tqkspky', form, '1PLc3xymOa3PrKHEX')
     .then(
       response => {
         console.log('SUCCESS!', response.status, response.text)
@@ -266,12 +265,16 @@ function sendEmail(event) {
     )
 }
 
-// Adiciona o ouvinte de eventos ao formulário
+// Adicionar evento de envio ao formulário
 document.getElementById('contact-form').addEventListener('submit', sendEmail)
 
-// Função para mostrar o modal
+// Função para mostrar o modal de confirmação
 function showModal() {
-  document.getElementById('confirmationModal').style.display = 'block'
+  const modal = document.getElementById('confirmationModal')
+  modal.style.display = 'block'
+  setTimeout(() => {
+    modal.style.display = 'none'
+  }, 3000) // Fechar automaticamente após 3 segundos
 }
 
 // Função para fechar o modal
